@@ -203,16 +203,32 @@
         updateUI();
       }
 
-      buttons.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const action = btn.getAttribute('data-action');
-          const value = btn.getAttribute('data-value');
-          if (action === 'clear') return clearAll();
-          if (action === 'equals') return equals();
-          if (value) return inputOperator(normalizeOperator(value)) || inputDigit(value);
-          if (/^\d$/.test(value)) return inputDigit(value);
-        });
-      });
+     buttons.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const action = btn.getAttribute('data-action');
+    const value = btn.getAttribute('data-value');
+
+    if (action === 'clear') {
+      clearAll();
+      return;
+    }
+
+    if (action === 'equals') {
+      equals();
+      return;
+    }
+
+    if (/^\d+$/.test(value)) {
+      inputDigit(value);
+      return;
+    }
+
+    if (['+', '-', '*', '/'].includes(value)) {
+      inputOperator(value);
+      return;
+    }
+  });
+});
 
       // Navbar toggle
       const toggle = document.querySelector('.nav-toggle');
