@@ -167,7 +167,9 @@ html.theme-dark .status {
 }
 
 .nav-toggle {
-  display: none;
+  display:none;
+  
+    flex-direction: column;
   border: 1px solid var(--border);
   background: rgba(255,255,255,0.7);
   border-radius: 12px;
@@ -182,9 +184,9 @@ html.theme-dark .status {
 
 .nav-toggle .bar {
   display: block;
-  width: 22px;
+  width: 20px;
   height: 2px;
-  margin: 4px 0;
+  margin: 3px 0;
   background: #111827;
   border-radius: 2px;
 }
@@ -220,6 +222,7 @@ html.theme-dark .status {
 /* Mobile nav */
 @media (max-width: 720px) {
   .nav-toggle { display: inline-flex; }
+
   .nav-menu {
     position: absolute;
     right: 0;
@@ -237,11 +240,23 @@ html.theme-dark .status {
     pointer-events: none;
     transform: scale(0.98);
     transition: opacity 160ms ease, transform 160ms ease;
+    z-index: 1500;
   }
+
   .nav-menu.open {
     opacity: 1;
     pointer-events: auto;
     transform: scale(1);
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    line-height: 1.2;
+    padding: 10px 12px;
+    margin: 0;
+    box-sizing: border-box;
   }
 }
 
@@ -250,7 +265,7 @@ html.theme-dark .status {
 
 .hero {
  
-  padding: 36px 0 10px;
+  padding: 36px 0 20px;
 }
 
 .hero-grid {
