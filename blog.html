@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog</title>
+  <meta name="description" content="Blog page with responsive cards and consistent navigation." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      
+      <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span class="theme-icon" aria-hidden="true">🌙</span>
+      </button>
+
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+
+        <div class="nav-menu" id="nav-menu">
+          <a class="nav-link" href="index.html">Portfolio</a>
+          <a class="nav-link active" href="blog.html">Blog</a>
+          <a class="nav-link" href="shop.html">Product Gallery</a>
+          <a class="nav-link" href="calculator.html">Calculator</a>
+          <a class="nav-link" href="contact.html">Consultation Form</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <section class="page-heading">
+      <div class="container">
+        <h1>Blog</h1>
+        <p class="lead">Short posts focused on practical web development tips.</p>
+      </div>
+    </section>
+
+    <section class="container section">
+      <h2 class="section-title">Latest Posts</h2>
+      <div class="cards blog-cards">
+        <article class="post-card">
+          <h3>Scalable Architecture for Web Systems</h3>
+          <p>Building robust backend systems is an art. It requires not just writing code, but understanding how data flows, scales, and stays secure under pressure</p>
+          <a href="#" class="read-more-link" data-title="Scalable Architecture for Web Systems" data-body="The secret lies in the separation of logic and database management. This post explores how to leverage caching techniques and load balancing to ensure your system remains robust and high-performing under heavy traffic.">Read more →</a>
+        </article>
+
+        <article class="post-card">
+          <h3>Data-Driven Design</h3>
+          <p>In the age of information, how we present data is as important as the data itself. A well-designed dashboard can transform complex datasets into actionable insights</p>
+          <a href="#" class="read-more-link" data-title="Data-Driven Design" data-body="Don't build based on assumptions! We discuss how to transform raw datasets into actionable insights through interactive visualizations, enabling smarter technical decisions and user-centric interfaces.">Read more →</a>
+        </article>
+
+        <article class="post-card">
+          <h3>AI-Driven User Assistance</h3>
+          <p>Integrating LLMs into everyday workflows is redefining productivity. My work with UniSmart’s AI assistant shows that automation isn't about replacing humans, but empowering them</p>
+          <a href="#" class="read-more-link" data-title="AI-Driven User Assistance" data-body="Ever wondered how to integrate a smart assistant into your system? Discover how I integrated OpenAI APIs into UniSmart, transforming a static interface into an interactive partner that understands user needs.">Read more →</a>
+        </article>
+
+        <article class="post-card">
+          <h3>Bridging Laravel & Angular</h3>
+          <p>Explore how Laravel 13 continues to push the boundaries of web development by enhancing performance, deepening support for AI integration, and simplifying complex database migration workflows.</p>
+          <a href="#" class="read-more-link" data-title="Bridging Laravel & Angular" data-body="Combining the backend power of Laravel with the frontend flexibility of Angular creates a technical harmony that is hard to beat. Here are the best practices for bridging these technologies in enterprise-level applications.">Read more →</a>
+        </article>
+
+        <article class="post-card">
+          <h3>What’s New in Laravel 13</h3>
+          <p>Combining Laravel’s backend power with Angular’s structured frontend creates a robust, type-safe architecture perfect for scalable enterprise web applications.</p>
+          <a href="#" class="read-more-link" data-title="What’s New in Laravel 13" data-body="Laravel is constantly evolving! We break down the most significant updates that make coding faster, more secure, and more efficient, with a deep dive into new developer tools for large-scale projects.">Read more →</a>
+        </article>
+
+        <article class="post-card">
+          <h3>AI-Powered Development</h3>
+          <p>Artificial Intelligence is transforming coding by automating repetitive tasks, accelerating debugging, and acting as an intelligent partner for writing clean, efficient code.</p>
+          <a href="#" class="read-more-link" data-title="AI-Powered Development" data-body="Artificial Intelligence doesn't replace developers; it accelerates them. I share my workflow on using AI-powered tools to optimize debugging processes and suggest clean, efficient code improvements in seconds.">Read more →</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const links = document.querySelectorAll('.read-more-link');
+
+      links.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+
+          const title = this.getAttribute('data-title');
+          const body = this.getAttribute('data-body');
+
+          const msg = body ? body : ("Thank you for your interest!\n\nThe full content for '" + title + "' will be available in the next update.");
+
+          const overlay = document.createElement('div');
+          overlay.style.position = 'fixed';
+          overlay.style.inset = '0';
+          overlay.style.background = 'rgba(0,0,0,0.55)';
+          overlay.style.display = 'grid';
+          overlay.style.placeItems = 'center';
+          overlay.style.zIndex = '9999';
+          overlay.style.padding = '18px';
+
+          overlay.innerHTML = `
+            <div style="width:min(520px, 92vw); background: rgba(255,255,255,0.92); border: 1px solid rgba(255,255,255,0.35); border-radius: 18px; box-shadow: 0 24px 70px rgba(0,0,0,0.35); overflow:hidden;">
+
+
+              <div style="padding:16px 16px 12px; border-bottom:1px solid rgba(0,0,0,0.06); font-weight:900;">Read more</div>
+              <div style="padding:14px 16px; color:#0f172a; line-height:1.45; white-space:pre-line;">${msg}</div>
+              <div style="display:flex; gap:10px; justify-content:flex-end; padding:14px 16px;">
+                <button type="button" style="border:1px solid rgba(2,6,23,0.18); background: rgba(255,255,255,0.85); padding:10px 14px; border-radius:14px; cursor:pointer; font-weight:900;" id="bbai-close">OK</button>
+              </div>
+            </div>
+          `;
+
+          const isDark = document.documentElement.classList.contains('theme-dark');
+          if (isDark) {
+            const modal = overlay.querySelector('div');
+            const header = modal.querySelector('div');
+            const bodyDiv = header.nextElementSibling;
+            const okBtn = overlay.querySelector('#bbai-close');
+
+            modal.style.background = 'rgba(11,18,32,0.92)';
+            modal.style.border = '1px solid rgba(255,255,255,0.10)';
+            header.style.color = '#e5e7eb';
+            bodyDiv.style.color = '#e5e7eb';
+
+            okBtn.style.background = 'rgba(255,255,255,0.06)';
+            okBtn.style.border = '1px solid rgba(255,255,255,0.12)';
+            okBtn.style.color = '#e5e7eb';
+          }
+
+
+          document.body.appendChild(overlay);
+
+          const close = () => {
+            overlay.remove();
+            document.removeEventListener('keydown', onKey);
+          };
+
+          const onKey = (e) => {
+            if (e.key === 'Escape') close();
+          };
+
+          overlay.addEventListener('click', (ev) => {
+            if (ev.target === overlay) close();
+          });
+
+          overlay.querySelector('#bbai-close').addEventListener('click', close);
+          document.addEventListener('keydown', onKey);
+        });
+      });
+    });
+
+    (function () {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.classList.add('theme-dark');
+
+      const btn = document.querySelector('.theme-toggle');
+      if (btn) {
+        const icon = btn.querySelector('.theme-icon');
+        if (icon) icon.textContent = document.documentElement.classList.contains('theme-dark') ? '☀️' : '🌙';
+
+        btn.addEventListener('click', () => {
+          const isDark = document.documentElement.classList.toggle('theme-dark');
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+          if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+        });
+      }
+
+      const toggle = document.querySelector('.nav-toggle');
+      const menu = document.querySelector('#nav-menu');
+      if (!toggle || !menu) return;
+
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        menu.classList.toggle('open');
+      });
+
+      menu.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target && target.matches('a.nav-link')) {
+          menu.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      const year = document.getElementById('year');
+      if (year) year.textContent = String(new Date().getFullYear());
+    })();
+  </script>
+</body>
+</html>
+

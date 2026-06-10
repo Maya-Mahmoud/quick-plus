@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Product Gallery</title>
+  <meta name="description" content="Product Gallery page with responsive product cards." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      
+
+      <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span class="theme-icon" aria-hidden="true">🌙</span>
+      </button>
+<button class="cart-toggle" type="button" aria-label="Open cart" aria-expanded="false" aria-controls="cart-menu" title="Cart">
+          <span class="cart-icon" aria-hidden="true">🛒</span>
+          <span class="cart-badge" id="cart-badge">0</span>
+        </button>
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+
+        
+
+        <div class="nav-menu" id="nav-menu">
+          <a class="nav-link" href="index.html">Portfolio</a>
+          <a class="nav-link" href="blog.html">Blog</a>
+          <a class="nav-link active" href="shop.html">Product Gallery</a>
+          <a class="nav-link" href="calculator.html">Calculator</a>
+          <a class="nav-link" href="contact.html">Consultation Form</a>
+        </div>
+
+        <div class="cart-dropdown" id="cart-menu" role="dialog" aria-label="Cart">
+          <div class="cart-dropdown-header">
+            <div class="cart-title">Your Cart</div>
+            <button class="cart-close" type="button" aria-label="Close cart">✕</button>
+          </div>
+          <ul class="cart-items" id="cart-items" role="list">
+            <!-- Items injected by JS -->
+          </ul>
+
+          <div class="cart-total" aria-live="polite">
+            <div class="cart-total-row">
+              <span class="cart-total-label">Total Price</span>
+              <span class="cart-total-value" id="cart-total-price">$0</span>
+            </div>
+          </div>
+
+          <div class="cart-empty" id="cart-empty">Cart is empty.</div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <section class="page-heading">
+      <div class="container">
+        <h1>Product Gallery</h1>
+        <p class="lead">Click the cart icon above to view your selected items</p>
+      </div>
+    </section>
+
+    <section class="container section">
+      <h2 class="section-title">Featured Products</h2>
+
+    
+
+      <div class="product-grid" role="list">
+        <article class="product" role="listitem" data-product-id="p1">
+         <div class="product-image-container">
+    <img src="images/prod4.png"  class="product-img">
+  </div>
+          <h3>Pro Gaming Controller</h3>
+          
+          <p class="price">price : $30</p>
+          <p class="muted">Next-gen performance. Unmatched comfort</p>
+          <button class="btn btn-primary add-btn" type="button">Add to cart</button>
+        </article>
+
+        <article class="product" role="listitem" data-product-id="p2">
+           <div class="product-image-container">
+    <img src="images/prod5.png"  class="product-img">
+  </div>
+          <h3>iPhone 17 Pro</h3>
+          <p class="price">price : $1,199</p>
+          <p class="muted">Next-gen power in your palm</p>
+          <button class="btn btn-primary add-btn" type="button">Add to cart</button>
+        </article>
+
+        <article class="product" role="listitem" data-product-id="p3">
+           <div class="product-image-container">
+    <img src="images/prod3.png"  class="product-img">
+  </div>
+          <h3>Pro DSLR Camera</h3>
+          <p class="price">price : $899</p>
+          <p class="muted">Capture every detail with pro-grade clarity.</p>
+          <button class="btn btn-primary add-btn" type="button">Add to cart</button>
+        </article>
+
+        <article class="product" role="listitem" data-product-id="p4">
+          <div class="product-image-container">
+    <img src="images/prod1.png"  class="product-img">
+  </div>
+          <h3>Skincare Set</h3>
+          <p class="price">price : 20$</p>
+          <p class="muted">Essential care for a radiant, healthy glow.</p>
+          <button class="btn btn-primary add-btn" type="button">Add to cart</button>
+        </article>
+
+        <article class="product" role="listitem" data-product-id="p5">
+          <div class="product-image-container">
+    <img src="images/prod2.png"  class="product-img">
+  </div>
+          <h3>Elegant Mug</h3>
+          <p class="price">price : $9</p>
+          <p class="muted">Minimalist elegance for your desk.</p>
+          <button class="btn btn-primary add-btn" type="button">Add to cart</button>
+        </article>
+
+        <article class="product" role="listitem" data-product-id="p6">
+           <div class="product-image-container">
+    <img src="images/prod6.png"  class="product-img">
+  </div>
+          <h3>Classic Watch</h3>
+          <p class="price">price : $90</p>
+          <p class="muted">Precision timekeeping with a sophisticated design.</p>
+          <button class="btn btn-primary add-btn" type="button">Add to cart</button>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+   
+  </footer>
+
+  <script>
+    const productData = new Map();
+    const buttons = document.querySelectorAll('.add-btn');
+
+    // Build product map (id -> {name, price, qty})
+    document.querySelectorAll('.product').forEach((card) => {
+      const name = card.querySelector('h3')?.textContent?.trim() || 'Product';
+      const priceText = card.querySelector('.price')?.textContent?.trim() || '';
+      const id = card.getAttribute('data-product-id') || '';
+      if (!id) return;
+      const img = card.querySelector('img');
+      const thumbImg = img ? img.outerHTML : '';
+      productData.set(id, { id, name, priceText, qty: 0, thumbImg });
+    });
+
+
+    let totalQty = 0;
+    let totalPrice = 0;
+    const counterDisplay = document.getElementById('cart-counter');
+    const badge = document.getElementById('cart-badge');
+    const totalPriceEl = document.getElementById('cart-total-price');
+
+    const dropdown = document.getElementById('cart-menu');
+    const cartItemsEl = document.getElementById('cart-items');
+    const cartEmptyEl = document.getElementById('cart-empty');
+    const cartToggleBtn = document.querySelector('.cart-toggle');
+    const cartCloseBtn = document.querySelector('.cart-close');
+
+    function setBadge(n) {
+      if (badge) badge.textContent = String(n);
+      if (counterDisplay) counterDisplay.innerText = 'Items in cart: ' + n;
+    }
+
+    function formatPrice(p) {
+      return p || '';
+    }
+
+    function renderCart() {
+      const items = Array.from(productData.values()).filter(p => p.qty > 0);
+      cartItemsEl.innerHTML = '';
+
+      // Re-calc total price on every render
+      totalPrice = 0;
+      items.forEach(p => {
+        const priceNum = Number((p.priceText || '').replace(/[^0-9.]/g, ''));
+        if (!Number.isNaN(priceNum)) totalPrice += priceNum * p.qty;
+      });
+      if (totalPriceEl) totalPriceEl.textContent = `$${totalPrice.toFixed(2).replace(/\.00$/, '')}`;
+
+      if (items.length === 0) {
+        cartEmptyEl.style.display = 'block';
+        if (totalPriceEl) totalPriceEl.textContent = '$0';
+        dropdown?.classList.remove('open');
+        cartToggleBtn?.setAttribute('aria-expanded', 'false');
+        return;
+      }
+
+
+      cartEmptyEl.style.display = 'none';
+
+      items.forEach(p => {
+        const li = document.createElement('li');
+
+        li.className = 'cart-item';
+        li.setAttribute('role', 'listitem');
+        li.innerHTML = `
+          <div class="cart-item-main">
+            <div class="cart-item-thumb" aria-hidden="true">
+              ${p.thumbImg}
+            </div>
+            <div>
+              <div class="cart-item-name">${p.name}</div>
+              <div class="cart-item-price">${formatPrice(p.priceText)}</div>
+            </div>
+          </div>
+
+          <div class="cart-item-actions">
+            <button class="cart-item-remove" type="button" data-remove-id="${p.id}" aria-label="Remove one">🗑️</button>
+            <div class="cart-item-qty">&times; ${p.qty}</div>
+          </div>
+        `;
+        cartItemsEl.appendChild(li);
+      });
+
+    }
+
+    function addToCart(productId) {
+      const p = productData.get(productId);
+      if (!p) return;
+      p.qty += 1;
+      totalQty += 1;
+      setBadge(totalQty);
+      renderCart();
+    }
+
+    function removeOne(productId) {
+      const p = productData.get(productId);
+      if (!p || p.qty <= 0) return;
+      p.qty -= 1;
+      totalQty = Math.max(0, totalQty - 1);
+      setBadge(totalQty);
+      renderCart();
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const productCard = button.closest('.product');
+        const productId = productCard?.getAttribute('data-product-id');
+        addToCart(productId);
+
+        const originalText = button.innerText;
+        button.innerText = 'Added!';
+        button.classList.add('btn-added');
+        setTimeout(() => {
+          button.innerText = originalText;
+          button.classList.remove('btn-added');
+        }, 350);
+      });
+    });
+
+    function openCart() {
+      if (!dropdown || !cartToggleBtn) return;
+      dropdown.classList.add('open');
+      cartToggleBtn.setAttribute('aria-expanded', 'true');
+      renderCart();
+    }
+
+    function closeCart() {
+      if (!dropdown || !cartToggleBtn) return;
+      dropdown.classList.remove('open');
+      cartToggleBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    cartToggleBtn?.addEventListener('click', () => {
+      const isOpen = dropdown?.classList.contains('open');
+      if (isOpen) closeCart();
+      else openCart();
+    });
+
+    cartCloseBtn?.addEventListener('click', () => closeCart());
+
+    document.addEventListener('click', (e) => {
+      if (!dropdown || !cartToggleBtn) return;
+
+      const removeBtn = e.target?.closest?.('.cart-item-remove');
+      if (removeBtn) {
+        const id = removeBtn.getAttribute('data-remove-id');
+        removeOne(id);
+        return;
+      }
+
+      const target = e.target;
+      const clickedInside = dropdown.contains(target) || cartToggleBtn.contains(target);
+      if (!clickedInside) closeCart();
+    });
+
+    setBadge(0);
+    renderCart();
+
+    (function () {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.classList.add('theme-dark');
+
+      const btn = document.querySelector('.theme-toggle');
+      if (btn) {
+        const icon = btn.querySelector('.theme-icon');
+        if (icon) icon.textContent = document.documentElement.classList.contains('theme-dark') ? '☀️' : '🌙';
+
+        btn.addEventListener('click', () => {
+          const isDark = document.documentElement.classList.toggle('theme-dark');
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+          if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+        });
+      }
+
+      const toggle = document.querySelector('.nav-toggle');
+      const menu = document.querySelector('#nav-menu');
+      if (!toggle || !menu) return;
+
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        menu.classList.toggle('open');
+      });
+
+      menu.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target && target.matches('a.nav-link')) {
+          menu.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      const year = document.getElementById('year');
+      if (year) year.textContent = String(new Date().getFullYear());
+    })();
+  </script>
+</body>
+</html>
+
