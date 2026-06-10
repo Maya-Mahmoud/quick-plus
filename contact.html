@@ -6,6 +6,7 @@
   <title>Consultation Form</title>
   <meta name="description" content="Consultation form with validation and success message." />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -13,9 +14,8 @@
   <header class="site-header">
     <div class="container header-inner">
       
-
       <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
-        <span class="theme-icon" aria-hidden="true">🌙</span>
+        <i class="theme-icon fas fa-moon" aria-hidden="true"></i>
       </button>
 
       <nav class="nav" aria-label="Primary">
@@ -79,7 +79,6 @@
                 <option>Other</option>
               </select>
             </label>
-
           </div>
 
           <label class="field">
@@ -98,26 +97,27 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    
-  </footer>
+  <footer class="site-footer"></footer>
 
   <script>
     (function () {
-      const saved = localStorage.getItem('theme');
-      if (saved === 'dark') document.documentElement.classList.add('theme-dark');
-
       const btn = document.querySelector('.theme-toggle');
-      if (btn) {
-        const icon = btn.querySelector('.theme-icon');
-        if (icon) icon.textContent = document.documentElement.classList.contains('theme-dark') ? '☀️' : '🌙';
-
-        btn.addEventListener('click', () => {
-          const isDark = document.documentElement.classList.toggle('theme-dark');
-          localStorage.setItem('theme', isDark ? 'dark' : 'light');
-          if (icon) icon.textContent = isDark ? '☀️' : '🌙';
-        });
+      const icon = btn.querySelector('.theme-icon');
+      
+      // تهيئة الثيم عند تحميل الصفحة
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') {
+        document.documentElement.classList.add('theme-dark');
+        icon.classList.replace('fa-moon', 'fa-sun');
       }
+
+      // منطق تبديل الثيم
+      btn.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('theme-dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        icon.classList.toggle('fa-moon');
+        icon.classList.toggle('fa-sun');
+      });
 
       // Navbar toggle
       const toggle = document.querySelector('.nav-toggle');
@@ -129,18 +129,14 @@
           menu.classList.toggle('open');
         });
         menu.addEventListener('click', (e) => {
-          const target = e.target;
-          if (target && target.matches('a.nav-link')) {
+          if (e.target && e.target.matches('a.nav-link')) {
             menu.classList.remove('open');
             toggle.setAttribute('aria-expanded', 'false');
           }
         });
       }
 
-      const year = document.getElementById('year');
-      if (year) year.textContent = String(new Date().getFullYear());
-
-      // Form handling (front-end only)
+      // Form handling
       const form = document.getElementById('consultForm');
       const statusEl = document.getElementById('formStatus');
       if (!form || !statusEl) return;
@@ -151,19 +147,17 @@
       }
 
       form.addEventListener('input', () => {
-        if (statusEl) statusEl.textContent = '';
+        statusEl.textContent = '';
       });
 
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-
         const fd = new FormData(form);
         const fullName = String(fd.get('fullName') || '').trim();
         const phone = String(fd.get('phone') || '').trim();
         const email = String(fd.get('email') || '').trim();
         const message = String(fd.get('message') || '').trim();
 
-        // Basic validation
         if (!fullName || !phone || !email || !message) {
           setStatus('Please fill all required fields (*)', 'error');
           return;
@@ -182,4 +176,3 @@
   </script>
 </body>
 </html>
-

@@ -562,13 +562,18 @@ html.theme-dark .read-more-link:hover {
   justify-content: center;
   gap: 10px;
 }
-
+.theme-toggle i, 
+.cart-toggle i, 
+.nav-toggle .bar {
+    font-size: 1rem; /* يمكنكِ تغيير 1.5 إلى 2 أو أكثر لتكبيرها */
+}
 /* Cart (Shop navbar dropdown) */
 .cart-toggle {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 12px;
+  font-size: 1.2rem;
+  padding: 15px 15px;
   border-radius: 14px;
   border: 1px solid var(--border);
   background: rgba(13, 205, 222, 0.237);
@@ -608,12 +613,13 @@ html.theme-dark .read-more-link:hover {
   width: min(360px, 86vw);
   margin-top: 0;
 
-  background:linear-gradient(
-        135deg,
-       #3fa2d0, 
-       #440a6d1e,
-       #474648,
-      #3fa2d0);
+background: linear-gradient(
+  135deg,
+  #3fa2d0,
+  #5b34765c,
+  #474648,
+  #3fa2d0
+);
   border: 1px solid var(--border);
   border-radius: 16px;
   box-shadow: var(--shadow);
@@ -763,9 +769,12 @@ html.theme-dark .cart-item-remove {
 
 .cart-empty {
   text-align: center;
-  color: var(--muted);
+  color: black;
   font-weight: 800;
   padding: 14px 0;
+}
+html.theme-dark  .cart-empty {
+  color: white;
 }
 
 html.theme-dark .cart-dropdown {
