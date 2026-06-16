@@ -293,10 +293,12 @@ margin: -10px 0 0 0;
 }
 
 .lead {
-  margin: 12px 0 0;
-  color: var(--muted);
-  font-size: 16px;
-  max-width: 60ch;
+  margin: 12px 0 24px !important;
+  font-stretch: normal !important;
+  font-weight: 450 !important;
+  color: var(--muted) !important;
+  font-size: 16px !important;
+  max-width: 60ch !important;
 }
 
 .hero-badges {
@@ -376,7 +378,7 @@ html.theme-dark .pill {
   font-size: clamp(28px, 3.2vw, 38px);
 }
 
-.page-heading .lead { margin-top: 10px; }
+.page-heading .lead { margin-top: 10px !important; }
 
 .cards {
   display: grid;
@@ -517,7 +519,17 @@ html.theme-dark .pill {
   opacity: 1;
   transform: translateY(0);
 }
-
+.work-card h2,
+.work-card h3,
+.post-card h3 {
+  font-size: 1.4rem !important;  
+    text-align: center !important; 
+    width: 100% !important;
+    margin-top: 10px !important;
+    margin-bottom: 12px !important;
+    font-weight: 600 !important; 
+    letter-spacing: 0.5px !important;
+}
 
 .link { 
   display: inline-block;
@@ -869,12 +881,12 @@ html.theme-dark .btn-primary {
 
 .btn-primary:hover { filter: brightness(1.02); background: rgb(91, 84, 222);}
 
-.btn-ghost {
+.btn-outline-secondary {
  background: linear-gradient(135deg,var(--primary),var(--accent) );
   border-color: rgba(79,70,229,0.22);
   color: #c8c7d5;
 }
-html.theme-dark .btn-ghost {
+html.theme-dark .btn-outline-secondary {
     background: linear-gradient(
         135deg,
          #4a7c59,
@@ -888,7 +900,7 @@ html.theme-dark .btn-ghost {
 }
 
 
-.btn-ghost:hover { background: rgb(78, 70, 229); }
+.btn-outline-secondary:hover { background: rgb(78, 70, 229); }
 
 /* Product grid */
 .product-grid {
